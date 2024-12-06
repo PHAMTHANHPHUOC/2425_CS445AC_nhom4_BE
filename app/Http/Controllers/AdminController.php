@@ -63,4 +63,45 @@ class AdminController extends Controller
             ]);
         }
     }
+    public function thongTin()
+    {
+        $admin = Auth::guard('sanctum')->user();
+
+        return response()->json([
+            'data' => $admin
+        ]);
+    }
+    public function dangxuat()
+    {
+        $admin = Auth::guard('sanctum')->user();
+        if ($admin) {
+            DB::table('personal_access_tokens')
+                ->where('id', $admin->currentAccessToken()->id)->delete();
+            return response()->json([
+                'status' => true,
+                'message' => "Đã Đăng Xuất Thiết Bị Thành Công"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Vui lòng đăng nhập"
+            ]);
+        }
+    }
+    public function kiemTraChiaKhoaAdmin()
+    {
+        $admin  = $this->isUserAdmin();
+
+        if ($admin) {
+            return response()->json([
+                'status'   =>   true,
+                'message'  =>   'Ok, bạn có thể đi qua!',
+            ]);
+        } else {
+            return response()->json([
+                'status'   =>   false,
+                'message'  =>   'Bạn chưa đăng nhập tài khoản!',
+            ]);
+        }
+    }
 }

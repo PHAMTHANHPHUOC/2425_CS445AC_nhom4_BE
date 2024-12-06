@@ -31,6 +31,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/admin/create', [AdminController::class, 'store']);
 Route::post('/admin/login', [AdminController::class, 'actionLogin']);
+Route::get('/admin/thong-tin', [AdminController::class, 'thongTin']);
+Route::get('/admin/dang-xuat', [AdminController::class, 'dangxuat']);
+Route::post('/admin/kiem-tra-chia-khoa', [AdminController::class, 'kiemTraChiaKhoaAdmin']);
 
 Route::post('/khach-hang/create', [KhachHangController::class, 'store']);
 Route::post('/khach-hang/login', [KhachhangController::class, 'actionLogin']);
