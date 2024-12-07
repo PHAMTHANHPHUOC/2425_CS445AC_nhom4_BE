@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\CapNhapKhachHangRequest;
 use App\Http\Requests\DoiMatKhauKhachHangRequest;
 use App\Http\Requests\DoiMatKhaurRequest;

@@ -7,6 +7,7 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\NapTienController;
 use App\Http\Controllers\TuDoController;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\ThongTinChuyenKhoanController;
@@ -73,6 +74,10 @@ Route::post('/khach-hang/nap-tien-tk', [DonHangController::class, 'acTionNapTien
 Route::get('/don-hang/data', [DonHangController::class, 'data']);
 
 Route::get('/thong-tin-ck/data', [ThongTinChuyenKhoanController::class, 'getData']);
+
+Route::post('/tu-do/update', [TuDoController::class, 'update']);
+Route::post('/tu-do/change-status', [TuDoController::class, 'changeStatus']);
+Route::get('/tu-do/data-pin', [TuDoController::class, 'dataPinTu']);
 
 
 
