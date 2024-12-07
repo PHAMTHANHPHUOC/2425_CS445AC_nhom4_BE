@@ -74,4 +74,22 @@
     ]);
         }
 
+        public function store(Request $request)
+        {
+            $Tu_do = TuDo::create([
+                'ten_san_pham'   => $request->ten_san_pham,
+                'hinh_anh'       => $request->hinh_anh,
+                'gia_ban'        => $request->gia_ban,
+                'is_active'      => $request->is_active,
+                'has_active'     => $request->has_active,
+                'pin_active'     => $request->pin_active,
+            ]);
+
+            // Sau khi xong thì BE nên trả về FE thông tin, muốn trả về gì thì do coder
+            return response()->json([
+                'message'  =>   'Đã tạo mới thành công!',
+                'status'   =>   true
+            ]);
+        }
+
     }

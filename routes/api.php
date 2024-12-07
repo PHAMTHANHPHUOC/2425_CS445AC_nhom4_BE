@@ -75,6 +75,7 @@ Route::get('/thong-tin-ck/data', [ThongTinChuyenKhoanController::class, 'getData
 
 Route::post('/tu-do/thanh-toan', [TuDoController::class, 'thanhToan']);
 Route::get('/tu-do/data', [TuDoController::class, 'getData']);
+Route::post('/tu-do/create', [TuDoController::class, 'store']);
 
 
 
@@ -87,7 +88,4 @@ Route::get('/tu-do/data', [TuDoController::class, 'getData']);
 
 
 Route::get('/khach-hang/hoa-don-thanh-toan', [DonHangController::class, 'hoadon']);
-
-
-
 
