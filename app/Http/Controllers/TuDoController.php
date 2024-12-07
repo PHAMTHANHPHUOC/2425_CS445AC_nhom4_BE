@@ -95,5 +95,31 @@
             ]);
 
         }
+        public function getData()
+        {
+            $data = TuDo::all();
+
+            $current_time = Carbon::now();
+
+            $data->transform(function ($item) use ($current_time) {
+                $expiration_time = new Carbon($item->expiration_time);
+
+                // Kiểm tra nếu đã hết hạn
+                if ($current_time->greaterThanOrEqualTo($expiration_time)) {
+                    $item->is_active = 0; // Chuyển trạng thái về mặc định
+                    $item->id_khach_hang = null;
+                    $item->pin_active = rand(100000, 999999); // Reset mã PIN
+                    $item->expiration_time = null; // Xóa thời gian hết hạn
+
+                    $item->save(); // Lưu thay đổi vào database
+                }
+
+                return $item;
+            });
+
+    return response()->json([
+        'data' => $data,
+    ]);
+        }
 
     }
