@@ -67,5 +67,15 @@
                 ]);
             }
         }
+         public function dataPinTu()
+        {
+            $khach_hang = Auth::guard('sanctum')->user();
+            $data = TuDo::where('id_khach_hang' , $khach_hang->id)->get();
+
+            return response()->json([
+                'data'  =>  $data
+            ]);
+
+        }
        
     }
