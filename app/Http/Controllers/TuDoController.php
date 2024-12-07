@@ -91,5 +91,21 @@
                 'status'   =>   true
             ]);
         }
+        public function desroy($id)
+        {
+            $data   =   TuDo::where('id', $id)->first();
+            if ($data) {
+                $data->delete();
+                return response()->json([
+                    'status'    =>   true,
+                    'message'   =>   'Đã xóa danh mục thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status'    =>   false,
+                    'message'   =>   'Không tìm được danh mục để xóa!'
+                ]);
+            }
+        }
 
     }
