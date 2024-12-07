@@ -37,5 +37,35 @@
                 ]);
             }
         }
+         public function changeStatus(Request $request)
+        {
+
+            $data = TuDo::where('id', $request->id)->first();
+            if ($data) {
+                if ($data->is_active == 0) {
+                    $data->is_active = 1;
+
+
+
+                } else {
+                    $data->is_active = 0;
+                    $data->id_khach_hang = 0;
+                    $pin_hash = rand(100000, 999999);
+                    $data->update([
+                        'pin_active'     =>  $pin_hash
+                    ]);
+                }
+                $data->save();
+                return response()->json([
+                    'status'    =>   true,
+                    'message'   =>   'Đã đổi trạng thái danh mục  !',
+                ]);
+            } else {
+                return response()->json([
+                    'status'    =>   false,
+                    'message'   =>   'Không tìm được danh mục để cập nhật!'
+                ]);
+            }
+        }
        
     }

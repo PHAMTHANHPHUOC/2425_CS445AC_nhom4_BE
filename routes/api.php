@@ -71,6 +71,7 @@ Route::get('/don-hang/data', [DonHangController::class, 'data']);
 Route::get('/thong-tin-ck/data', [ThongTinChuyenKhoanController::class, 'getData']);
 
 Route::post('/tu-do/update', [TuDoController::class, 'update']);
+Route::post('/tu-do/change-status', [TuDoController::class, 'changeStatus']);
 
 
 
