@@ -68,6 +68,7 @@ Route::get('/khach-hang/hoa-don-thanh-toan', [KhachhangController::class, 'hoaDo
 // Route::post('/khach-hang/nap-tien-tk', [NapTienController::class, 'napTien']);//DEL
 
 
+
 Route::post('/khach-hang/nap-tien-tk', [DonHangController::class, 'acTionNapTien']);
 Route::get('/don-hang/data', [DonHangController::class, 'data']);
 
@@ -82,7 +83,7 @@ Route::get('/tu-do/data', [TuDoController::class, 'getData']);
 Route::post('/tu-do/create', [TuDoController::class, 'store']);
 Route::delete('/tu-do/delete/{id}', [TuDoController::class, 'desroy']);
 
-
+Route::post('/tu-do/doi-ma-pin', [TuDoController::class, 'updatePin']);
 
 
 
