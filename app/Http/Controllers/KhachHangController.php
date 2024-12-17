@@ -119,7 +119,6 @@ class KhachHangController extends Controller
     {
         try {
             $quenMK = KhachHang::where('email', $request->email)->first();
-
             if ($quenMK) {
                 $quenMK->hash_reset = Str::uuid();
                 $quenMK->save();
