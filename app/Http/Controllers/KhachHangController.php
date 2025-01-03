@@ -118,11 +118,11 @@ class KhachHangController extends Controller
     public function actionQuenmatKhau(Request $request)
     {
         try {
-            $quenMK = KhachHang::where('email', $request->email)->first();
-            if ($quenMK) {
-                $quenMK->hash_reset = Str::uuid();
-                $quenMK->save();
-                Mail::to($request->email)->send(new QuenMatKhau($quenMK->hash_reset, $quenMK->ho_va_ten));
+            $tai_khoan = KhachHang::where('email', $request->email)->first();
+            if ($tai_khoan) {
+                $tai_khoan->hash_reset = Str::uuid();
+                $tai_khoan->save();
+                Mail::to($request->email)->send(new QuenMatKhau($tai_khoan->hash_reset, $tai_khoan->ho_va_ten));
             }
             return response()->json([
                 'status' => true,

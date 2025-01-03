@@ -2,7 +2,8 @@
 
     namespace App\Http\Controllers;
 
-    use App\Http\Requests\CreateTuDorequest;
+use App\Http\Requests\CapNhatTuRequest;
+use App\Http\Requests\CreateTuDorequest;
     use App\Models\GiaoDich;
     use App\Models\KhachHang;
     use App\Models\TuDo;
@@ -15,7 +16,7 @@
 
     class TuDoController extends Controller
     {
-        public function update(Request $request)
+        public function update(CapNhatTuRequest $request)
         {
             $data = TuDo::where('id', $request->id)->first();
             if ($data) {
@@ -36,6 +37,39 @@
                     'message'   =>   'Không tìm được tủ đồ để cập nhật!'
                 ]);
             }
+        }
+        public function desroy($id)
+        {
+            $data   =   TuDo::where('id', $id)->first();
+            if ($data) {
+                $data->delete();
+                return response()->json([
+                    'status'    =>   true,
+                    'message'   =>   'Đã xóa danh mục thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status'    =>   false,
+                    'message'   =>   'Không tìm được danh mục để xóa!'
+                ]);
+            }
+        }
+        public function store(CapNhatTuRequest $request)
+        {
+            $Tu_do = TuDo::create([
+                'ten_san_pham'   => $request->ten_san_pham,
+                'hinh_anh'       => $request->hinh_anh,
+                'gia_ban'        => $request->gia_ban,
+                'is_active'      => $request->is_active,
+                'has_active'     => $request->has_active,
+                'pin_active'     => $request->pin_active,
+            ]);
+
+            // Sau khi xong thì BE nên trả về FE thông tin, muốn trả về gì thì do coder
+            return response()->json([
+                'message'  =>   'Đã tạo mới thành công!',
+                'status'   =>   true
+            ]);
         }
          public function changeStatus(Request $request)
         {
