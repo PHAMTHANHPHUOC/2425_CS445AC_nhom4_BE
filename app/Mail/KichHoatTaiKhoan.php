@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class KichHoatKhachHang extends Mailable
+class KichHoatTaiKhoan extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -23,11 +23,6 @@ class KichHoatKhachHang extends Mailable
     }
 
     public function build() {
-        return $this->subject("Kích Hoạt Tài Khoản{")->view('khachhang', ['hash_active' => $this->hash_active, 'name' => $this->name]);
+        return $this->subject("Kích Hoạt Tài Khoản ")->view('mail_kich_hoat_tai_khoan', ['hash_active' => $this->hash_active, 'name' => $this->name]);
     }
-
-
-
-
-
 }

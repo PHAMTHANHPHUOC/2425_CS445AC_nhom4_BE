@@ -49,6 +49,7 @@ Route::post('/admin/khach-hang/delete', [KhachhangController::class, 'deleteTaiK
 Route::post('/khach-hang/kiem-tra-chia-khoa', [KhachhangController::class, 'kiemTraChiaKhoaKhachHang']);
 
 Route::get('/kich-hoat-tai-khoan/{id}', [KhachHangController::class, 'kichHoatTaiKhoan']);
+Route::post('/admin/khach-hang/kich-hoat-tai-khoan', [KhachhangController::class, 'kichHoatTaiKhoanKhachHang']);
 
 Route::post('/khach-hang/quen-mat-khau', [KhachhangController::class, 'actionQuenmatKhau']);
 Route::post('/khach-hang/lay-lai-mat-khau/{hash_reset}', [KhachhangController::class, 'actionLayLaiMatKhau']);

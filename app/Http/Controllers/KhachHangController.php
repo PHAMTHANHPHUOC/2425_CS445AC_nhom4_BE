@@ -9,6 +9,7 @@ use App\Http\Requests\DoiMatKhaurRequest;
 use App\Http\Requests\LayLaiMatKhauRequest;
 use App\Http\Requests\ThemMoiKhachHangRequest;
 use App\Mail\KichHoatKhachHang;
+use App\Mail\KichHoatTaiKhoan;
 use App\Mail\QuenMatKhau;
 use App\Mail\QuenMatKhauKhachHang;
 use App\Models\DonHang;
@@ -53,7 +54,7 @@ class KhachHangController extends Controller
             'hash_active'       => Str::uuid(),
         ]);
 
-        Mail::to($request->email)->send(new KichHoatKhachHang($tai_khoan->hash_active, $request->ho_va_ten));
+        Mail::to($request->email)->send(new KichHoatTaiKhoan($tai_khoan->hash_active, $request->ho_va_ten));
 
         return response()->json([
             'status' => true,
@@ -97,7 +98,7 @@ class KhachHangController extends Controller
     }
     public function kichHoatTaiKhoan($hash_active)
     {
-        $tai_khoan = KhachHang::where('hash_active', $hash_active)->where('is_active', 0)->first();
+          $tai_khoan = KhachHang::where('hash_active', $hash_active)->where('is_active', 0)->first();
 
         if($tai_khoan) {
             $tai_khoan->is_active = 1;
@@ -112,6 +113,25 @@ class KhachHangController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Tài khoản bạn đã được kích hoạt hoặc không tồn tại!"
+            ]);
+        }
+    }
+    public function kichHoatTaiKhoanKhachHang(Request $request){
+         $data = KhachHang::where('id', $request->id)->first();
+        if ($data) {
+            if ($data->is_active == 0) {
+                $data->is_active = 1;
+                $data->save();
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Đã kích hoạt tài khoản thành công!"
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Có lỗi xảy ra!"
             ]);
         }
     }
