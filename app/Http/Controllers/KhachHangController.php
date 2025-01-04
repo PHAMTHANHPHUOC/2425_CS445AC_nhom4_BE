@@ -53,9 +53,8 @@ class KhachHangController extends Controller
             'password'          => bcrypt($request->password),
             'hash_active'       => Str::uuid(),
         ]);
-
-        Mail::to($request->email)->send(new KichHoatTaiKhoan($tai_khoan->hash_active, $request->ho_va_ten));
-
+         $tai_khoan->is_active = 1;
+         $tai_khoan->save();
         return response()->json([
             'status' => true,
             'message' => "Đăng Kí Tài Khoản Thành Công!"
